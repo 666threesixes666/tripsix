@@ -1,33 +1,27 @@
-# Copyright owners: Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# ebuild updated for funtoo
 
-EAPI="5"
+EAPI=5
+inherit eutils
 
-inherit autotools-utils
-
-DESCRIPTION="A richly featured multi-effects processor emulating a uitar effects pedalboard"
+DESCRIPTION="Basic rack of 10 effects for guitar with presets, banks and MIDI control"
 HOMEPAGE="http://rakarrack.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
+SRC_URI="mirror://sourceforge/rakarrack/${P}.tar.bz2"
 RESTRICT="mirror"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="*"
+IUSE=""
 
-RDEPEND="x11-libs/fltk
+DEPEND="x11-libs/fltk
 	x11-libs/libXpm
 	>=media-libs/alsa-lib-0.9
-	media-libs/libsamplerate
-	media-libs/libsndfile
 	>=media-sound/alsa-utils-0.9
 	>=media-sound/jack-audio-connection-kit-0.100.0"
-DEPEND="${RDEPEND}"
+RDEPEND="${DEPEND}"
 
-AUTOTOOLS_AUTORECONF="1"
-
-src_prepare() {
-	mv configure.in configure.ac
-	eaclocal
-	eautomake --add-missing
+src_install() {
+	make DESTDIR="${D}" install
+	insinto /usr/share/doc/"${PN}"
+	doins TODO
 }
