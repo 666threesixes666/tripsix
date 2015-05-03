@@ -14,7 +14,7 @@ SRC_URI="http://fltk.org/pub/${PN}/${PV/_}/${P/_}-source.tar.gz"
 
 SLOT="0"
 LICENSE="FLTK LGPL-2"
-KEYWORDS="amd64 arm x86"
+KEYWORDS="*"
 IUSE="cairo debug doc examples games opengl pdf static-libs threads xft xinerama"
 
 RDEPEND="
