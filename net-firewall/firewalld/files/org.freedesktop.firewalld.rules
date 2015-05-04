@@ -1,0 +1,8 @@
+// Let users in plugdev group modify firewalld settings
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.fedoraproject.FirewallD1.all" &&
+        subject.isInGroup("plugdev") && subject.active) {
+        return "yes";
+    }
+});
+
