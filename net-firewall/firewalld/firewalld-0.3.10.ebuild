@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
-inherit autotools eutils gnome2-utils python-r1 multilib bash-completion-r1
+inherit autotools eutils user gnome2-utils python-r1 multilib bash-completion-r1
 DESCRIPTION="A firewall daemon with D-BUS interface providing a dynamic firewall"
 HOMEPAGE="http://fedorahosted.org/firewalld"
 SRC_URI="https://fedorahosted.org/released/firewalld/${P}.tar.bz2"
@@ -17,7 +17,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
 	net-firewall/ebtables
 	net-firewall/iptables[ipv6]
-	|| ( >=sys-apps/openrc-0.11.5 sys-apps/systemd )
+	|| ( >=sys-apps/openrc-0.11.5 )
 	gui? ( x11-libs/gtk+:3 )"
 DEPEND="${RDEPEND}
 	dev-libs/glib:2
@@ -62,6 +62,7 @@ src_install() {
 		rm -rf "${D}/usr/share/applications"
 	fi
 	newinitd "${FILESDIR}"/firewalld.init firewalld
+	# Allow users in plugdev group to modify system connections
 	insinto /usr/share/polkit-1/rules.d/
 	doins "${FILESDIR}/org.freedesktop.firewalld.rules"
 }
