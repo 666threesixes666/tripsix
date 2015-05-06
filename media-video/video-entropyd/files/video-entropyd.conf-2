@@ -1,0 +1,22 @@
+# Distributed under the terms of the GNU General Public License v2
+
+# /etc/conf.d/video-entropyd
+
+# video-entropyd uses a v4l device to get images and compare them to
+# one another.  a common method to force video entropy is to point 
+# your camera at a lava lamp.
+
+# the video device can safely be left commented to auto detect cameras.
+#DEVICE="/dev/video0"
+
+# SAMPLERATE is the number of seconds to wait for the next snapshot.
+# It is possible to set to 0
+SAMPLERATE="1"
+
+# Testing is done on entropy to ensure randomness at the expense
+# of output speed uncomment to disable testing.
+
+#TEST="-s"
+
+# To disable forking uncomment:
+#FORK="-f"

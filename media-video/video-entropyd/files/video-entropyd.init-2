@@ -1,0 +1,26 @@
+#!/sbin/runscript
+# Distributed under the terms of the GNU General Public License v2
+
+depend() {
+	need modules
+	provide entropy
+}
+
+start() {
+	local params=""
+	[ -n "$DEVICE" ] && params="$params -i $DEVICE"
+	[ -n "$SAMPLERATE" ] && params="$params -S $SAMPLERATE"
+	[ -n "$TEST" ] && params="$params $TEST"
+	[ -n "$FORK" ] && params="$params $FORK"
+
+	ebegin "Starting video entropy gathering daemon"
+	start-stop-daemon --start --quiet \
+		--exec /usr/sbin/video-entropyd -- ${params}
+	eend ${?}
+}
+
+stop() {
+	ebegin "Stopping video entropy gathering daemon"
+	start-stop-daemon --stop --quiet --exec /usr/sbin/video-entropyd
+	eend ${?}
+}

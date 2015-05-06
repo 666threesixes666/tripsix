@@ -1,0 +1,22 @@
+# Distributed under the terms of the GNU General Public License v2
+
+# /etc/conf.d/audio-entropyd
+
+# The acceptable values are DEVICE, SAMPLERATE, and TEST
+# for optimum entropy leave test commented, and set sample rate
+# to the maximum sample rate your sound card can handle.
+
+#DEVICE="hw:0"
+
+# SAMPLERATE must be a valid sampling rate of your audio source,
+# the default of 11025 is used if left commented.
+#SAMPLERATE="44050"
+
+# Testing is done on entropy to ensure randomness at the expense
+# of output speed uncomment to disable testing.
+
+#TEST="-s"
+
+# To disable forking uncomment.
+#FORK="-n"
+
